@@ -6,7 +6,7 @@ import "./../styles/tilannetiedot.css";
 export default function Wrapper() {
   return (
     <div className="wrapper">
-      <h1>Tilannetietopankki</h1>
+      <h1 className="tilannetietopankki-header">Tilannetietopankki</h1>
       <UusiTieto />
       <Tilannetiedot />
     </div>

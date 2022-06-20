@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import getTilannetiedot from "../services/getTilannetiedot";
 import axios from "axios";
 import env from "../env.json";
 
@@ -34,8 +33,8 @@ export default function Tilannetiedot() {
           <div className="tilannetieto" key={tieto.tieto_id}>
             <p>{tieto.kuvaus}</p>
             <div className="tieto-meta">
-              <p>{tieto.lahettaja}</p>
-              <p>{tieto.label}</p>
+              <i>{tieto.lahettaja}</i>
+              <p className="tieto-label">{tieto.label}</p>
               <p>date</p>
             </div>
           </div>
