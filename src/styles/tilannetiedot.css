@@ -4,4 +4,43 @@
   flex-flow: column wrap;
   align-items: center;
   justify-content: space-around;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  text-align: center;
+}
+
+.tilannetiedot {
+  background-color: beige;
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+.tilannetieto {
+  width: 50%;
+  background-color: aqua;
+  margin: 0.2%;
+  padding: 1%;
+}
+
+.tieto-meta {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    background-color: olive;
+  }
+
+  .tilannetiedot {
+    align-items: flex-start;
+  }
+  .tilannetieto {
+    width: 70%;
+  }
 }
