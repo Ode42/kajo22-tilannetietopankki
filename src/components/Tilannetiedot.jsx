@@ -35,7 +35,7 @@ export default function Tilannetiedot() {
             <div className="tieto-meta">
               <i>{tieto.lahettaja}</i>
               <p className="tieto-label">{tieto.label}</p>
-              <p>date</p>
+              <p className="datetime-label">{tieto.tieto_time}</p>
             </div>
           </div>
         );

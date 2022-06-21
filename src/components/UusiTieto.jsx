@@ -13,14 +13,8 @@ export default function UusiTieto() {
 
   useEffect(() => {
     const today = new Date();
-    const date =
-      today.getFullYear() +
-      "-" +
-      (today.getMonth() + 1) +
-      "-" +
-      today.getDate();
-    const time =
-      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const date = today.getDate() + "." + (today.getMonth() + 1);
+    const time = today.getHours() + ":" + today.getMinutes();
     const dateTime = date + " " + time;
     setDatetime(dateTime);
   }, []);
@@ -79,14 +73,14 @@ export default function UusiTieto() {
           </button>
         </div>
       ) : (
-        <div
+        <button
           className="uusiTietoNappi"
           onClick={() => {
             auki ? setAuki(false) : setAuki(true);
           }}
         >
           Uusi tilannetieto
-        </div>
+        </button>
       )}
     </div>
   );
