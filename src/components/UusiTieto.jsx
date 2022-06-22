@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import UusiTietoNappi from "./UusiTietoNappi";
 import axios from "axios";
 import env from "../env.json";
+import postTilannetieto from "../services/postTilannetieto";
+import populateTime from "../utils/populateTime";
 
 export default function UusiTieto() {
   const [auki, setAuki] = useState(false);
@@ -12,11 +14,7 @@ export default function UusiTieto() {
   const [datetime, setDatetime] = useState("");
 
   useEffect(() => {
-    const today = new Date();
-    const date = today.getDate() + "." + (today.getMonth() + 1);
-    const time = today.getHours() + ":" + today.getMinutes();
-    const dateTime = date + " " + time;
-    setDatetime(dateTime);
+    setDatetime(populateTime());
   }, []);
 
   return (
@@ -53,16 +51,12 @@ export default function UusiTieto() {
               const postURL = env.variables.baseURL.concat(
                 "/tilanne/tilannetiedot"
               );
-              axios
-                .post(postURL, {
-                  tietoKuvaus: kuvaus,
-                  tieto_time: datetime,
-                  tietoLahettaja: lahettaja,
-                  tietoLabel: label,
-                })
-                .then((response) => {
-                  console.log(response);
-                })
+              postTilannetieto(postURL, {
+                kuvaus: kuvaus,
+                datetime: datetime,
+                lahettaja: lahettaja,
+                label: label,
+              })
                 .then(setAuki(false))
                 .catch((error) => {
                   console.error(error);

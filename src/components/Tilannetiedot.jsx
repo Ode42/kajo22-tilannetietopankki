@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import env from "../env.json";
+import deleteTilannetieto from "../services/deleteTilannetieto";
 
 export default function Tilannetiedot() {
   const [tilannetiedot, setTilannetiedot] = useState([]);
@@ -11,7 +12,6 @@ export default function Tilannetiedot() {
       const tilannetiedotURL = baseURL.concat("/tilanne/tilannetiedot");
       const haetutTiedot = await axios.get(tilannetiedotURL);
       setTilannetiedot(haetutTiedot.data);
-      console.log("haettu");
     } catch (error) {
       console.error(error);
     }
@@ -36,6 +36,19 @@ export default function Tilannetiedot() {
               <i>{tieto.lahettaja}</i>
               <p className="tieto-label">{tieto.label}</p>
               <p className="datetime-label">{tieto.tieto_time}</p>
+              <button
+                className="delete-button"
+                onClick={() => {
+                  const deleteURL = env.variables.baseURL.concat(
+                    `/tilanne/tilannetiedot/${tieto.tieto_id}`
+                  );
+                  deleteTilannetieto(deleteURL).catch((error) => {
+                    console.error(error);
+                  });
+                }}
+              >
+                Poista
+              </button>
             </div>
           </div>
         );
