@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import UusiTietoNappi from "./UusiTietoNappi";
-import axios from "axios";
 import env from "../env.json";
 import postTilannetieto from "../services/postTilannetieto";
 import populateTime from "../utils/populateTime";
