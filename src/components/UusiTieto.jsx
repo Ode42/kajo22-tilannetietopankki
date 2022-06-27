@@ -18,7 +18,11 @@ export default function UusiTieto() {
     getLabels(env.variables.baseURL.concat("/labels"))
       .then((labels) => setLabels(labels.data))
       .catch((error) => console.error(error));
-    setDatetime(populateTime());
+
+    const interval = setInterval(() => {
+      setDatetime(populateTime());
+    }, 30000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
