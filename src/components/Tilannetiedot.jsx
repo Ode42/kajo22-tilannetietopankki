@@ -6,7 +6,6 @@ import getLabels from "../services/getLabels";
 
 export default function Tilannetiedot() {
   const [tilannetiedot, setTilannetiedot] = useState([]);
-  const [labels, setLabels] = useState([]);
 
   async function getTilannetiedot() {
     try {
@@ -21,9 +20,6 @@ export default function Tilannetiedot() {
 
   useEffect(() => {
     getTilannetiedot();
-    getLabels(env.variables.baseURL.concat("/labels"))
-      .then((labels) => setLabels(labels.data))
-      .catch((error) => console.error(error));
 
     const interval = setInterval(() => {
       getTilannetiedot();
