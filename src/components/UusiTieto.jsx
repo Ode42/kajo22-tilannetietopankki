@@ -1,10 +1,14 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import env from "../env.json";
 import postTilannetieto from "../services/postTilannetieto";
 import populateTime from "../utils/populateTime";
+import getLabels from "../services/getLabels";
 
 export default function UusiTieto() {
   const [auki, setAuki] = useState(false);
+
+  const [labels, setLabels] = useState([]);
 
   const [kuvaus, setKuvaus] = useState("");
   const [lahettaja, setLahettaja] = useState("");
@@ -12,6 +16,9 @@ export default function UusiTieto() {
   const [datetime, setDatetime] = useState("");
 
   useEffect(() => {
+    getLabels(env.variables.baseURL.concat("/labels"))
+      .then((labels) => setLabels(labels.data))
+      .catch((error) => console.error(error));
     setDatetime(populateTime());
   }, []);
 
@@ -36,12 +43,19 @@ export default function UusiTieto() {
               onChange={(e) => setLahettaja(e.target.value)}
             />
             <label htmlFor="label-field">Label: </label>
-            <input
-              id="label-field"
-              type="text"
-              value={label}
+            <select
+              name="labels"
+              id="labels"
               onChange={(e) => setLabel(e.target.value)}
-            />
+            >
+              {labels.map((label) => {
+                return (
+                  <option key={label.name} value={label.name} id={label.name}>
+                    {label.name}
+                  </option>
+                );
+              })}
+            </select>
           </form>
           <button
             type="submit"
