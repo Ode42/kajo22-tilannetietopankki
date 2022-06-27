@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import env from "../env.json";
 import postTilannetieto from "../services/postTilannetieto";
@@ -27,7 +26,7 @@ export default function UusiTieto() {
       {auki ? (
         <div className="uusiTietoLomake">
           <h3>Uusi tilannetieto</h3>
-          <form>
+          <form className="uusi-tieto">
             <label htmlFor="kuvaus-field">Tilannetieto: </label>
             <input
               id="kuvaus-field"

@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import env from "../env.json";
 import deleteTilannetieto from "../services/deleteTilannetieto";
+import getLabels from "../services/getLabels";
 
 export default function Tilannetiedot() {
   const [tilannetiedot, setTilannetiedot] = useState([]);
+  const [labels, setLabels] = useState([]);
 
   async function getTilannetiedot() {
     try {
@@ -19,6 +21,9 @@ export default function Tilannetiedot() {
 
   useEffect(() => {
     getTilannetiedot();
+    getLabels(env.variables.baseURL.concat("/labels"))
+      .then((labels) => setLabels(labels.data))
+      .catch((error) => console.error(error));
 
     const interval = setInterval(() => {
       getTilannetiedot();
@@ -34,7 +39,7 @@ export default function Tilannetiedot() {
             <p>{tieto.kuvaus}</p>
             <div className="tieto-meta">
               <i>{tieto.lahettaja}</i>
-              <p className="tieto-label">{tieto.label}</p>
+              <p className={tieto.label}>{tieto.label}</p>
               <p className="datetime-label">{tieto.tieto_time}</p>
               <button
                 className="delete-button"
