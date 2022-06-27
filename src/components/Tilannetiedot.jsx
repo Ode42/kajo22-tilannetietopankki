@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import env from "../env.json";
 import deleteTilannetieto from "../services/deleteTilannetieto";
-import getTilannetiedot from "../services/getTilannetiedot";
 
 export default function Tilannetiedot() {
   const [tilannetiedot, setTilannetiedot] = useState([]);
 
+  async function getTilannetiedot() {
+    try {
+      const baseURL = env.variables.baseURL;
+      const tilannetiedotURL = baseURL.concat("/tilanne/tilannetiedot");
+      const haetutTiedot = await axios.get(tilannetiedotURL);
+      setTilannetiedot(haetutTiedot.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
-    getTilannetiedot(env.variables.baseURL.concat("/tilanne/tilannetiedot"))
-      .then((tiedot) => setTilannetiedot(tiedot.data))
-      .catch((error) => console.error(error));
+    getTilannetiedot();
 
     const interval = setInterval(() => {
       getTilannetiedot();
