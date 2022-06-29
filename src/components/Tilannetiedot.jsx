@@ -11,7 +11,7 @@ export default function Tilannetiedot() {
       const baseURL = env.variables.baseURL;
       const tilannetiedotURL = baseURL.concat("/tilanne/tilannetiedot");
       const haetutTiedot = await axios.get(tilannetiedotURL);
-      setTilannetiedot(haetutTiedot.data);
+      setTilannetiedot(haetutTiedot.data.rows);
     } catch (error) {
       console.error(error);
     }

@@ -80,6 +80,13 @@ export default function UusiTieto() {
           >
             Lähetä
           </button>
+          <button
+            onClick={() => {
+              setAuki(false);
+            }}
+          >
+            Sulje
+          </button>
         </div>
       ) : (
         <button
